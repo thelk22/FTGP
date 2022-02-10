@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoinFlip</title>
+</head>
+<body>
+    <h1>
+        Welcome to CoinFlip!
+    </h1>
+    <label for="Vname">Value:</label>
+    <br/>
+    <input type="text" id="Vname" name="Vname" />
+    <br/>
+    <h2>
+        What's your choice?
+    </h2>
+    <table>
+        <tr>
+            <td>
+                <button type="button" onclick="headFunction()">
+                    <img src="images/heads.png" height="100" width="100" />
+                    Head
+                </button>
+            </td>
+            <td>
+                <button type="button" onclick="tailFunction()">
+                    <img src="images/tails.png" height="100" width="100" />
+                    Tail
+                </button>
+            </td>
+        </tr>
+    </table>
+    <script src="coinflip.js"></script>
+</body>
+</html>
