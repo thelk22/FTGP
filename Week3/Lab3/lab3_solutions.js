@@ -10,18 +10,19 @@ console.log(wallet.privateKey);
 let infuraId = "1c722de80b77412f86091fdf4d04b74b";
 let privKey = wallet.privateKey;
 let pubKey = wallet.publicKey;
+console.log(`The public key for Luke's test account is ${pubKey}`);
 let address = wallet.address;
-console.log(address);
+console.log(console.log(`The address for Luke's test account is ${address}`));
 
 // QUESTION 4
 // Check the balance of the account
 let infuraAddress = "https://rinkeby.infura.io/v3/" + infuraId;
 let web3provider = new Web3(infuraAddress);
 // First, use a promise to get the balance of the account
-var balance = web3provider.eth.getBalance(address);
-balance.then((res) => {
-  console.log(res);
+var balance = web3provider.eth.getBalance(address).then((result) => {
+  console.log(result);
 });
+
 // This returned a balance of 0
 // Interestingly, this shows that all you need is the public address to view the balance of an Ethereum account
 // Now, use an asynchronous function to get the balance
@@ -39,6 +40,8 @@ getBalance(address);
 //    No it doesn't! It simulates what a full client does.
 const ganache = require("ganache-core");
 const web3_ganache = new Web3(ganache.provider());
+
+let a = 5;
 async function callbackOnAccount(i, callback) {
   addresses = await web3_ganache.eth.getAccounts();
   console.log(addresses);
@@ -48,6 +51,8 @@ async function callbackOnAccount(i, callback) {
   console.log(`The balance of account ${i} is ${balance}`);
   console.log(`Performing callback on account ${i}`);
   callback(address);
+  x = 5;
+  console.log(`PRINTING X: ${x}`);
 }
 // e) What happens when you run the following from the CLI?
 // ganache-cli -m "bird now physical flavor file divide now impulse casino whip sponsor ankle"
@@ -94,7 +99,7 @@ var unsignedTrx = {
 };
 address0_key =
   "0x4f966364b388ece045f38a1e651e10cb86d8a63cc2df462f812f96e60f73fadc";
-sendTransaction(unsignedTrx, address0_key);
+// sendTransaction(unsignedTrx, address0_key);
 // Should work but for some reason doesn't want to!
 // The signing works, and the sending appears to work, however it's saying account 9 doesn't have enough funds for the transaction
 // despite account 9 clearly having enough funds... weird
