@@ -69,6 +69,13 @@ async function printNonce(address) {
 }
 callbackOnAccount(2, printNonce);
 
+// i) Send some Eth from one account to another
+// web3_ganache.eth.sendTransaction({
+//   to: "0xD6Bf7F551585d49C18c38Eb067CeA0AadB2a5E47",
+//   from: "0xea1050DBa435FCCdf1E4f027Cae948Bb0CE12Bfd",
+//   value: web3_ganache.utils.toWei("0.5", "ether"),
+// });
+
 // QUESTION 6
 // a) What is a raw transaction?
 //    It is a message sent across the P2P network from an EOA to another EOA or a wallet.
@@ -92,14 +99,14 @@ async function sendTransaction(unsignedTrx, address0_key) {
   console.log(`Transaction successful with hash ${receipt.transactionHash}`);
 }
 var unsignedTrx = {
-  from: "0x570cAb288F3d9FD3B309F631816A358D1022d907",
+  from: "0xD6Bf7F551585d49C18c38Eb067CeA0AadB2a5E47",
   to: "0xea1050DBa435FCCdf1E4f027Cae948Bb0CE12Bfd",
-  value: web3_ganache.utils.toWei("0.01", "ether"),
+  value: web3_ganache.utils.toWei("0.00000001", "ether"),
   gas: 21000,
 };
-address0_key =
-  "0x4f966364b388ece045f38a1e651e10cb86d8a63cc2df462f812f96e60f73fadc";
-// sendTransaction(unsignedTrx, address0_key);
+from_address_key =
+  "0x496431af2237583e2f37382a207117db30f15c28a0b9205a89eff098cd1b8364";
+sendTransaction(unsignedTrx, from_address_key);
 // Should work but for some reason doesn't want to!
 // The signing works, and the sending appears to work, however it's saying account 9 doesn't have enough funds for the transaction
 // despite account 9 clearly having enough funds... weird
