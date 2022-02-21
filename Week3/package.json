@@ -5,6 +5,7 @@
     "web3": "^1.7.0"
   },
   "dependencies": {
-    "buffer": "^6.0.3"
+    "buffer": "^6.0.3",
+    "ganache-cli": "^6.12.2"
   }
 }

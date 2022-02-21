@@ -9,6 +9,7 @@ console.log(wallet);
 console.log(wallet.privateKey);
 let infuraId = "1c722de80b77412f86091fdf4d04b74b";
 let privKey = wallet.privateKey;
+console.log(`The private key for Luke's test account is ${privKey}`);
 let pubKey = wallet.publicKey;
 console.log(`The public key for Luke's test account is ${pubKey}`);
 let address = wallet.address;
@@ -106,7 +107,7 @@ var unsignedTrx = {
 };
 from_address_key =
   "0x496431af2237583e2f37382a207117db30f15c28a0b9205a89eff098cd1b8364";
-sendTransaction(unsignedTrx, from_address_key);
+// sendTransaction(unsignedTrx, from_address_key);
 // Should work but for some reason doesn't want to!
 // The signing works, and the sending appears to work, however it's saying account 9 doesn't have enough funds for the transaction
 // despite account 9 clearly having enough funds... weird
