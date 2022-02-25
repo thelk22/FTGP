@@ -42,11 +42,16 @@ getBalance(address);
 const ganache = require("ganache-core");
 const web3_ganache = new Web3(ganache.provider());
 
+async function getAddresses() {
+  let addresses = await web3_ganache.eth.getAccounts();
+  return addresses;
+}
+
 let a = 5;
 async function callbackOnAccount(i, callback) {
-  addresses = await web3_ganache.eth.getAccounts();
+  let addresses = await web3_ganache.eth.getAccounts();
   console.log(addresses);
-  address = addresses[i - 1];
+  let address = addresses[i - 1];
   console.log(`The address of account ${i} is ${address}`);
   balance = await web3_ganache.eth.getBalance(address);
   console.log(`The balance of account ${i} is ${balance}`);
@@ -64,18 +69,25 @@ async function callbackOnAccount(i, callback) {
 //    address of ganache-cli and the chainId. Then we imported one of the accounts that exists in the
 //    ganache-cli using its private key. All of these accounts are initialised with 100ETH.
 // g) The nonce of a wallet account (an EOA) is the number of transactions that the account has initiated.
-async function printNonce(address) {
-  nonce = await web3_ganache.eth.getTransactionCount(address);
+let myTestAddress = "0xD6Bf7F551585d49C18c38Eb067CeA0AadB2a5E47";
+async function getAccountNonce(address) {
+  let nonce = await web3_ganache.eth.getTransactionCount(address);
   console.log(`The nonce of address ${address} is ${nonce}`);
+  return nonce;
 }
-callbackOnAccount(2, printNonce);
+getAccountNonce(myTestAddress);
+async function getAccountBalance(address) {
+  let balanceWei = await web3_ganache.eth.getBalance(address);
+  let balanceEth = web3_ganache.utils.fromWei(balanceWei);
+  console.log(`The balance of ${address} is ${balanceEth}`);
+  return balanceWei;
+}
+getAccountBalance(myTestAddress);
+// callbackOnAccount(2, getBalance);
+// callbackOnAccount(2, getAccountNonce);
 
 // i) Send some Eth from one account to another
-// web3_ganache.eth.sendTransaction({
-//   to: "0xD6Bf7F551585d49C18c38Eb067CeA0AadB2a5E47",
-//   from: "0xea1050DBa435FCCdf1E4f027Cae948Bb0CE12Bfd",
-//   value: web3_ganache.utils.toWei("0.5", "ether"),
-// });
+// The solutions for this are in sendTransaction.js
 
 // QUESTION 6
 // a) What is a raw transaction?
@@ -85,29 +97,7 @@ callbackOnAccount(2, printNonce);
 // b & c) Create a transaction and send it from one wallet to another. Do you need a private key?
 //    Yes, we will need a private key for the wallet we are sending the transaction from.
 //    This is to sign the transaction, which is necessary for any transaction being sent on Ethereum
-// Send a transaction from ganache account 9 to ganache account 1
-async function sendTransaction(unsignedTrx, address0_key) {
-  console.log(`Signing transaction to send ${unsignedTrx.value} Wei`);
-  var signedTrx = await web3_ganache.eth.accounts.signTransaction(
-    unsignedTrx,
-    address0_key
-  );
-  console.log(signedTrx);
-  var receipt = await web3_ganache.eth.sendSignedTransaction(
-    // Note: here you have to send the raw signed transaction, which is in hex format
-    signedTrx.rawTransaction
-  );
-  console.log(`Transaction successful with hash ${receipt.transactionHash}`);
-}
-var unsignedTrx = {
-  from: "0xD6Bf7F551585d49C18c38Eb067CeA0AadB2a5E47",
-  to: "0xea1050DBa435FCCdf1E4f027Cae948Bb0CE12Bfd",
-  value: web3_ganache.utils.toWei("0.00000001", "ether"),
-  gas: 21000,
-};
-from_address_key =
-  "0x496431af2237583e2f37382a207117db30f15c28a0b9205a89eff098cd1b8364";
-// sendTransaction(unsignedTrx, from_address_key);
-// Should work but for some reason doesn't want to!
-// The signing works, and the sending appears to work, however it's saying account 9 doesn't have enough funds for the transaction
-// despite account 9 clearly having enough funds... weird
+// Send a transaction from ganache account 0 to ganache account 1
+// The solutions for this are in sendTransaction.js
+
+// QUESTION 7
