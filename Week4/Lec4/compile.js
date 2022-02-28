@@ -27,5 +27,5 @@ var input = {
 };
 
 let output = JSON.parse(solc.compile(JSON.stringify(input)));
-
+// console.log(output.contracts["SimpleStorage.sol"].SimpleStorage);
 module.exports = output.contracts["SimpleStorage.sol"].SimpleStorage;
