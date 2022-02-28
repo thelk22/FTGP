@@ -1,3 +1,8 @@
+let mnemonic =
+  "bird now physical flavor file divide now impulse casino whip sponsor ankle";
+let infuraId = "1c722de80b77412f86091fdf4d04b74b";
+let apiKey = "https://rinkeby.infura.io/v3/" + infuraId;
+
 module.exports = {
   // Uncommenting the defaults below
   // provides for an easier quick-start with Ganache.
@@ -10,6 +15,13 @@ module.exports = {
       host: "127.0.0.1",
       port: 8545,
       network_id: "*",
+    },
+    // Use 'truffle console --network rinkeby' to launch truffle develop with this network
+    rinkeby: {
+      provider: () => new HDWalletProvider(mnemonic, apiKey),
+      network_id: 4,
+      gas: 5500000,
+      gasPrice: 10000000000,
     },
     //  test: {
     //    host: "127.0.0.1",
